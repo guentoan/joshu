@@ -61,6 +61,7 @@ func makeRandomPasswordUI(w fyne.Window) fyne.CanvasObject {
 	scrollable := container.NewVScroll(paddedContent)
 	return scrollable
 }
+
 func showRandomPasswordContent(w fyne.Window) {
 	content := makeRandomPasswordUI(w)
 	updateContent(w, content)

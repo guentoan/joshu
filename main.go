@@ -22,6 +22,9 @@ func main() {
 		widget.NewButton("Password Generator", func() {
 			showRandomPasswordContent(w)
 		}),
+		widget.NewButton("Bcrypt", func() {
+			showBcryptContent(w)
+		}),
 	)
 	// Wrap menu in padding
 	paddedMenu := container.NewPadded(menu)
