@@ -49,22 +49,19 @@ func makeRandomPasswordUI(w fyne.Window) fyne.CanvasObject {
 	header := makeHeader("Password Generator")
 	footer := makeFooter()
 
+	var passwordBlock *fyne.Container
 	generateButton := widget.NewButton("Generate Passwords and Keys", func() {
-		showRandomPasswordContent(w)
+		generatePassword(passwordBlock)
+		passwordBlock.Refresh()
 	})
 
-	passwordBlock := makePasswordUI(w)
+	passwordBlock = makePasswordUI(w)
 
 	content := container.NewBorder(header, footer, nil, nil,
 		container.NewVBox(generateButton, passwordBlock))
 	paddedContent := container.NewPadded(content)
 	scrollable := container.NewVScroll(paddedContent)
 	return scrollable
-}
-
-func showRandomPasswordContent(w fyne.Window) {
-	content := makeRandomPasswordUI(w)
-	updateContent(w, content)
 }
 
 func generateRandomPasswords(count int, passType string) []string {
@@ -80,7 +77,7 @@ func generateRandomPasswords(count int, passType string) []string {
 	return passwords
 }
 
-func makePasswordUI(w fyne.Window) fyne.CanvasObject {
+func makePasswordUI(w fyne.Window) *fyne.Container {
 	content := container.NewVBox()
 	// Generate 3 random passwords for each type
 	for _, pt := range supportPasswordTypes {
@@ -99,7 +96,7 @@ func makePasswordUI(w fyne.Window) fyne.CanvasObject {
 			// Copy button
 			coppyButton := widget.NewButtonWithIcon("", theme.ContentCopyIcon(), func() {
 				clipboard := w.Clipboard()
-				clipboard.SetContent(pw)
+				clipboard.SetContent(passwordText.Text)
 			})
 			coppyButton.Resize(fyne.NewSize(20, 20))
 
@@ -112,13 +109,21 @@ func makePasswordUI(w fyne.Window) fyne.CanvasObject {
 			container.NewGridWithColumns(3, passBlocks...),
 		)
 
-		paddedBlockContent := container.NewPadded(blockContent)
-
-		content.Add(paddedBlockContent)
+		content.Add(blockContent)
 	}
 
-	paddedContent := container.NewPadded(content)
-	return paddedContent
+	return content
+}
+
+func generatePassword(content *fyne.Container) {
+	for _, block := range content.Objects {
+		blockTitle := block.(*fyne.Container).Objects[0].(*canvas.Text).Text
+		passwords := generateRandomPasswords(3, blockTitle)
+		for i, pw := range passwords {
+			passwordText := block.(*fyne.Container).Objects[1].(*fyne.Container).Objects[i].(*fyne.Container).Objects[0].(*widget.Label)
+			passwordText.Text = pw
+		}
+	}
 }
 
 // Random returns a random float64 between 0 and 1.

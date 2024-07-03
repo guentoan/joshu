@@ -99,8 +99,3 @@ func makeBase64UI(w fyne.Window) fyne.CanvasObject {
 
 	return paddedContent
 }
-
-func showBase64Content(w fyne.Window) {
-	content := makeBase64UI(w)
-	updateContent(w, content)
-}

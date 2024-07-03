@@ -137,11 +137,6 @@ func makeBcryptUI(w fyne.Window) fyne.CanvasObject {
 	return paddedContent
 }
 
-func showBcryptContent(w fyne.Window) {
-	content := makeBcryptUI(w)
-	updateContent(w, content)
-}
-
 func parseInt(s string) (int, error) {
 	return strconv.Atoi(s)
 }

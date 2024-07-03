@@ -14,7 +14,6 @@ func showJsonContent(w fyne.Window) {
 	input.SetPlaceHolder("Enter JSON here...")
 
 	output := widget.NewMultiLineEntry()
-	//output.SetReadOnly(true)
 
 	beautifyButton := widget.NewButton("Beautify", func() {
 		var prettyJSON string
@@ -26,8 +25,7 @@ func showJsonContent(w fyne.Window) {
 		}
 	})
 
-	content := container.NewVBox(input, beautifyButton, output)
-	updateContent(w, content)
+	container.NewVBox(input, beautifyButton, output)
 }
 
 func jsonBeautify(input string, output *string) error {
