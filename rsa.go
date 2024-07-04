@@ -145,8 +145,6 @@ func makeRSAUI(w fyne.Window) fyne.CanvasObject {
 		}
 		RSAEncryptionOutput.SetText(encrypted)
 		RSAEncryptionOutput.Refresh()
-		RSAEncryptionInput.Text = ""
-		RSAEncryptionInput.Refresh()
 	})
 	EncryptButton.Importance = widget.HighImportance
 
