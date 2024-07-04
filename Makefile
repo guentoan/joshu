@@ -4,22 +4,22 @@ VERSION := 1.0.0
 # Fyne command
 FYNE := fyne package
 
-.PHONY: all clean build-macos build-linux build-windows
+.PHONY: all clean macos linux windows
 
-all: clean build-macos build-linux build-windows
+all: clean macos linux windows
 
 clean:
 	rm -rf $(APP_NAME).app
 	rm -rf $(APP_NAME).zip
 	rm -rf $(APP_NAME).exe
 
-build-macos: $(MACOS_DIR)
+macos: $(MACOS_DIR)
 	$(FYNE) -os darwin -icon icon.png -name $(APP_NAME) -appVersion $(VERSION)
 
-build-linux: $(LINUX_DIR)
+linux: $(LINUX_DIR)
 	$(FYNE) -os linux -icon icon.png -name $(APP_NAME) -appVersion $(VERSION)
 
-build-windows: $(WINDOWS_DIR)
+windows: $(WINDOWS_DIR)
 	$(FYNE) -os windows -icon icon.png -name $(APP_NAME) -appVersion $(VERSION)
 
 # Build all versions
