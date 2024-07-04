@@ -15,6 +15,7 @@ func main() {
 		container.NewTabItem("Base 64", makeBase64UI(w)),
 		container.NewTabItem("Password Generator", makeRandomPasswordUI(w)),
 		container.NewTabItem("Bcrypt", makeBcryptUI(w)),
+		container.NewTabItem("RSA Generator", makeRSAUI(w)),
 	)
 
 	tabs.SetTabLocation(container.TabLocationLeading)
